@@ -80,9 +80,11 @@ insert into  ordertour value('order01','tour01','customer01','chưa đặt'),
 ('order09','tour07','customer08','chưa đặt'),
 ('order10','tour09','customer010','chưa đặt');
 /*thống kế số lượng tour của các thành phố */ 
-select name_city,count(name_city) as SOLUONGTUOR from tour
-	join addresstour as ADDRESSTOUR on tour.id_tour = ADDRESSTOUR.id_addresstour
-	join City as c on ADDRESSTOUR.id_city = c.id_city group by name_city;
+select name_city, diemden from addresstour join city c  on c.id_city = addresstour.id_city;
+
+select name_city,count(id_tour) as SOLUONGTUOR from ordertour 
+	join customer as cus on cus.id_customer = ordertour.customer_id
+	join City as c on c.id_city = cus.id_city group by name_city;
 # tính số tour  bắt đàu trong tháng 3 năm 2020
 select count(_start) as TOURIN32021 from Tour where (month(_start) = '3' and year(_start)=2021);
 select * from Tour where (month(_start)=3 and year(_start)  = 2021);
